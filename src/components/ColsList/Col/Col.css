@@ -1,0 +1,7 @@
+.Col {
+  width: 2px;
+  background-color: darkseagreen;
+  display: inline-block;
+  margin: 0px 1px;
+  padding: 0;
+}

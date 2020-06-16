@@ -1,0 +1,33 @@
+.NavigationItems {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  height: 100%;
+}
+
+/* .NavigationItems li {
+  margin: 0;
+  box-sizing: border-box;
+  display: flex;
+  width: auto;
+  align-items: center;
+}
+
+.NavigationItems li a {
+  color:	#D3D3D3;
+  text-decoration: none;
+  width: 100%;
+  padding: 0px 10px;
+  font-size: 15px;
+  box-sizing: border-box;
+  display: block;
+  border-bottom: 4px solid transparent;
+}
+
+.NavigationItems li a:hover, .NavigationItems li a:active {
+    color: white;
+} */
+
