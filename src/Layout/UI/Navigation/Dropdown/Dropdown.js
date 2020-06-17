@@ -24,7 +24,7 @@ class Dropdown extends Component {
 
       for (let i = 0; i < this.props.menuLinks.length; i++) {
         menuLinks.push(
-          <li><span>{this.props.menuLinks[i]}</span></li>
+          <li>{this.props.menuLinks[i]}</li>
         );
         menuLinks.push(
           <li className="Separator"></li>
@@ -44,7 +44,8 @@ class Dropdown extends Component {
             {menuLinks}
           </ul>
         </li>
-        <Backdrop show={this.state.showMenu}/>
+        <Backdrop show={this.state.showMenu}
+          clicked={this.toggleMenu} />
       </Auxi>
     );
   }
