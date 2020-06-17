@@ -76,6 +76,8 @@ a {
   .NavbarHeader {
     display: flex;
     align-items: center;
+    position: relative;
+    z-index: 2;
 
     @media (max-width: 768px) {
       width: 100%;
@@ -146,6 +148,8 @@ a {
           text-decoration: none;
           display: inline-block;
           padding: 0.5rem 1rem;
+          position: relative;
+          z-index: 2;
           &:hover {
             color: $navbar-link-hover;
           }
@@ -155,6 +159,9 @@ a {
         }
 
         > span {
+          position: relative;
+          z-index: 2;
+
           color: $text-dark;
           text-decoration: none;
           display: inline-block;
@@ -191,7 +198,7 @@ a {
         width: auto;
         white-space: nowrap;
         box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-        z-index: 99999;
+        z-index: 2;
         border-radius: 0.75rem;
         display: none;
         @media (max-width: 768px) {
@@ -242,29 +249,3 @@ a {
     font-size: 1.05rem;
   }
 }
-
-/* .Toolbar {
-  height: 50px;
-  width: 100%;
-  top: 0;
-  left: 0;
-  background-color: #306AA5;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 20px;
-  box-sizing: border-box;
-  z-index: 50px;
-}
-
-.Toolbar nav {
-  height: 100%;
-}
-
-.Logo {
-  color: white;
-}
-
-.Title {
-  color: white;
-} */
