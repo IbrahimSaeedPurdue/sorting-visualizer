@@ -11,7 +11,8 @@ class SortingVisualizer extends Component {
     cols: [],
     colNum: 100,
     animations: [],
-    isSorted: false
+    isSorted: false,
+    currentAlgo: null
   };
 
   componentDidMount() {

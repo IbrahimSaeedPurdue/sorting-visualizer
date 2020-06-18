@@ -9,7 +9,9 @@ const dropdown = (props) => {
 
   for (let i = 0; i < props.links.length; i++) {
     menuLinks.push(
-      <li key={i}><span onClick={(event) => {}}>{props.links[i]}</span></li>
+      <li key={i}>
+        <span onClick={(event) => {props.clicked(event.target)}}>{props.links[i]}</span>
+        </li>
     );
     menuLinks.push(
       <li key={"seperator" + i} className="Separator"></li>
