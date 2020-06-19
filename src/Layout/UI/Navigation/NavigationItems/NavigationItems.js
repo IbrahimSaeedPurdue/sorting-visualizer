@@ -1,11 +1,8 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import '../../Toolbar/Toolbar.scss';
 import Dropdown from '../Dropdown/Dropdown';
-import {bubbleSort, selectionSort, insertionSort} from '../../../../containers/sortingVisualizer/SortingVisualizer';
 
-const NavigationItems = () => {
-
-
+const NavigationItems = (props) => {
 
   const [DropdownState, setDropdownState] = useState({
     elementaryMenu: false,
@@ -51,22 +48,24 @@ const NavigationItems = () => {
       algoChoice: choice
     });
   };
-  
+
   return (
     <ul className="NavbarNav">
-      <li className="Active"><a href="#">Home</a></li>
+      <li className="Active"><a href="/">Home</a></li>
       <Dropdown toggleMenu={toggleElementaryMenu}
+        currentAlgoHandler={props.currentAlgoHandler}
         showMenu={DropdownState.elementaryMenu}
         clicked={algoChoiceHandler}
         links={['Bubble Sort', 'Selection Sort', 'Insertion Sort']}>Elementary Sorts</Dropdown>
       <Dropdown toggleMenu={toggleComplexMenu}
+        currentAlgoHandler={props.currentAlgoHandler}
         showMenu={DropdownState.complexMenu}
         clicked={algoChoiceHandler}
         links={['Complex Sorts', 'Complex Sorts', 'Complex Sorts']}>Complex Sorts</Dropdown>
 
-      <li><a href="#">About</a></li>
-      <li><a href="#">Contact</a></li>
-      <li><a href="#">Signin</a></li>
+      <li><a href="/">About</a></li>
+      <li><a href="/">Contact</a></li>
+      <li><a href="/">Signin</a></li>
     </ul>
   );
 

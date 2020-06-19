@@ -6,14 +6,17 @@ import '../../components/ColsList/Col/Col.css';
 import Layout from '../../Layout/Layout';
 import ColsList from '../../components/ColsList/ColsList';
 
+
 class SortingVisualizer extends Component {
   state = {
     cols: [],
     colNum: 100,
     animations: [],
     isSorted: false,
-    currentAlgo: null
+    currentAlgo: 'Bubble Sort'
   };
+
+
 
   componentDidMount() {
     this.resetArray();
@@ -26,6 +29,10 @@ class SortingVisualizer extends Component {
     return false;
   }
 
+  currentAlgoHandler = (algo) => {
+    this.setState({currentAlgo: algo}, ()=>{console.log(algo);
+    });
+  };
 
   bubbleSort = () => {
     if (this.state.isSorted) {
@@ -132,7 +139,7 @@ class SortingVisualizer extends Component {
 
   render() {
     return (
-      <Layout>
+      <Layout currentAlgoHandler={this.currentAlgoHandler}>
         <ColsList cols={this.state.cols} />
         <button onClick={this.resetArray}>
           Reset Array
@@ -152,11 +159,14 @@ class SortingVisualizer extends Component {
         <button onClick={this.insertionSort}>
           Insertion sort
         </button>
+        <button onClick={this.insertionSort}>
+          Run {this.state.currentAlgo}
+        </button>
       </Layout>
     );
   }
 
-
 }
+
 
 export default SortingVisualizer;

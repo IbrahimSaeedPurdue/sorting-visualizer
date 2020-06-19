@@ -4,7 +4,7 @@ import Toolbar from '../Layout/UI/Toolbar/Toolbar';
 
 const layout = (props) => (
   <Auxi>
-    <Toolbar />
+    <Toolbar currentAlgoHandler={props.currentAlgoHandler} />
     <main>
       {props.children}
     </main>

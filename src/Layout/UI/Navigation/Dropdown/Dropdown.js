@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import '../../Toolbar/Toolbar.scss';
 import Backdrop from '../../Backdrop/Backdrop';
 import Auxi from '../../../../hoc/Auxi';
@@ -10,8 +10,11 @@ const dropdown = (props) => {
   for (let i = 0; i < props.links.length; i++) {
     menuLinks.push(
       <li key={i}>
-        <span onClick={(event) => {props.clicked(event.target)}}>{props.links[i]}</span>
-        </li>
+        <span onClick={(event) => {
+          props.currentAlgoHandler(props.links[i]);
+          props.clicked(event.target);
+        }}>{props.links[i]}</span>
+      </li>
     );
     menuLinks.push(
       <li key={"seperator" + i} className="Separator"></li>

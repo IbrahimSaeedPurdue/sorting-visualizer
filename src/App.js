@@ -3,7 +3,7 @@ import SortingVisualizer from './containers/sortingVisualizer/SortingVisualizer'
 
 function App() {
   return (
-      <SortingVisualizer />
+    <SortingVisualizer />
   );
 }
 

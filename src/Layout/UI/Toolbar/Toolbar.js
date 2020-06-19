@@ -7,19 +7,19 @@ const toolbar = (props) => (
       <div className="Container">
 
       <div className="NavbarHeader">
-        <button className="NavbarToggler" data-toggle="open-navbar1">
+        <button className="NavbarToggler">
           <span></span>
           <span></span>
           <span></span>
         </button>
-        <a href="#">
+        <a href="/">
           <h4>Controls <span>GO HERE!</span></h4>
         </a>
       </div>
 
       <div className="NavbarMenu" id="open-navbar1">
         {/* HERE */}
-        <NavigationItems />
+        <NavigationItems currentAlgoHandler={props.currentAlgoHandler}/>
       </div>
     </div>
   </nav>
