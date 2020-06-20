@@ -1,18 +1,26 @@
 const insertionSort = (colArray) => {
-  for (let i = colArray.length - 1; i > 0; i--) {
-    let currentVal = colArray[i];
-    console.log(currentVal);
-    for (let j = 0; j >= 0; j++) {
-      if (colArray[j] > currentVal) {
-        colArray[j + 1] = colArray[j];
-      } 
+  let animations = [];
+  for (let i = 1; i < colArray.length; i++) {
+    let val = colArray[i];
+    let j = i - 1;
+    while (j >= 0 && colArray[j] > val) {
+      animations.push({
+        cols: [j, j + 1],
+        val: val,
+        finalSwap: false
+      });
+      colArray[j + 1] = colArray[j];
+      j--;
     }
+    animations.push({
+      cols: [j + 1],
+      val: val,
+      finalSwap: true
+    });
 
+    colArray[j + 1] = val;
   }
-
- 
-  
-
+  return animations;
 };
 
 export default insertionSort;

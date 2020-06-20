@@ -13,7 +13,7 @@ const toolbar = (props) => (
           <span></span>
         </button>
         <a href="/">
-          <h4>Controls <span>GO HERE!</span></h4>
+          <h4>Sorting <span>Visualizer</span></h4>
         </a>
       </div>
 

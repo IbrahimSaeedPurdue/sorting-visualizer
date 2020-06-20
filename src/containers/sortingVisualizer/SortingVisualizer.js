@@ -25,14 +25,37 @@ class SortingVisualizer extends Component {
   shouldComponentUpdate = (prevProps, prevState) => {
     if (JSON.stringify(prevState.cols) !== JSON.stringify(this.state.cols)) {
       return true;
+    } else if (prevState.currentAlgo !== this.state.currentAlgo) {
+      return true;
     }
     return false;
   }
 
   currentAlgoHandler = (algo) => {
-    this.setState({currentAlgo: algo}, ()=>{console.log(algo);
-    });
+    this.setState({ currentAlgo: algo });
   };
+
+  runCurrentAlgo = () => {
+    switch (this.state.currentAlgo) {
+      case 'Bubble Sort':
+        this.bubbleSort();
+        break;
+      case 'Selection Sort':
+        this.selectionSort();
+        break;
+      case 'Insertion Sort':
+        this.insertionSort();
+        break;
+      case 'Merge Sort':
+        //this.mergeSort();
+        break;
+      case 'Quick Sort':
+        //this.quickSort();
+        break;
+      default:
+        break;
+    }
+  }
 
   bubbleSort = () => {
     if (this.state.isSorted) {
@@ -40,75 +63,82 @@ class SortingVisualizer extends Component {
       return;
     }
 
-    this.setAnimations(bubbleSortAlgo, () => {
-      const cols = Array.from(document.getElementsByClassName('Col'));
-      const animations = this.state.animations;
-
-      for (let i = 0; i < animations.length; i++) {
-        setTimeout(() => {
-          if (animations[i].swap) {
-            cols[animations[i].cols[0]].style.backgroundColor = 'blue';
-            cols[animations[i].cols[1]].style.backgroundColor = 'blue';
-
-            let tempHeight = cols[animations[i].cols[1]].style.height;
-            cols[animations[i].cols[1]].style.height = cols[animations[i].cols[0]].style.height;
-            cols[animations[i].cols[0]].style.height = tempHeight;
-          } else {
-            cols[animations[i].cols[0]].style.backgroundColor = 'red';
-            cols[animations[i].cols[1]].style.backgroundColor = 'red';
-          }
-
-          setTimeout(() => {
-            cols[animations[i].cols[0]].style.backgroundColor = 'darkseagreen';
-            cols[animations[i].cols[1]].style.backgroundColor = 'darkseagreen';
-          });
-        }, i * 10);
-      }
-
-      this.setState({ isSorted: true });
-    });
+    this.setAnimations(bubbleSortAlgo, this.playAnimations);
 
   };
 
   selectionSort = () => {
-    this.setAnimations(selectionSortAlgo, () => {
-      const cols = Array.from(document.getElementsByClassName('Col'));
-      const animations = this.state.animations;
-
-      for (let i = 0; i < animations.length; i++) {
-        setTimeout(() => {
-          if (animations[i].swap) {
-            cols[animations[i].cols[0]].style.backgroundColor = 'blue';
-            cols[animations[i].cols[1]].style.backgroundColor = 'blue';
-
-            let tempHeight = cols[animations[i].cols[1]].style.height;
-            cols[animations[i].cols[1]].style.height = cols[animations[i].cols[0]].style.height;
-            cols[animations[i].cols[0]].style.height = tempHeight;
-          } else {
-            cols[animations[i].cols[0]].style.backgroundColor = 'red';
-            cols[animations[i].cols[1]].style.backgroundColor = 'red';
-          }
-
-          setTimeout(() => {
-            cols[animations[i].cols[0]].style.backgroundColor = 'darkseagreen';
-            cols[animations[i].cols[1]].style.backgroundColor = 'darkseagreen';
-          }, 10);
-        }, i * 10);
-      }
-
-      this.setState({ isSorted: true });
-    });
-
+    this.setAnimations(selectionSortAlgo, this.playAnimations);
   }
 
   insertionSort = () => {
-    insertionSortAlgo([5, 9, 6, 1, 2]);
+    this.setAnimations(insertionSortAlgo, this.playInsertionAnimations);
   };
 
   setAnimations = (sortingAlgo, callback) => {
     const animations = sortingAlgo([...this.state.cols]);
     this.setState({ animations: animations }, callback);
   };
+
+  playAnimations = () => {
+    const cols = Array.from(document.getElementsByClassName('Col'));
+    const animations = this.state.animations;
+
+    for (let i = 0; i < animations.length; i++) {
+      setTimeout(() => {
+        if (animations[i].swap) {
+          cols[animations[i].cols[0]].style.backgroundColor = 'blue';
+          cols[animations[i].cols[1]].style.backgroundColor = 'blue';
+
+          let tempHeight = cols[animations[i].cols[1]].style.height;
+          cols[animations[i].cols[1]].style.height = cols[animations[i].cols[0]].style.height;
+          cols[animations[i].cols[0]].style.height = tempHeight;
+        } else {
+          cols[animations[i].cols[0]].style.backgroundColor = 'red';
+          cols[animations[i].cols[1]].style.backgroundColor = 'red';
+        }
+
+        setTimeout(() => {
+          cols[animations[i].cols[0]].style.backgroundColor = 'darkseagreen';
+          cols[animations[i].cols[1]].style.backgroundColor = 'darkseagreen';
+        }, 10);
+      }, i * 10);
+    }
+
+    this.setState({ isSorted: true });
+  }
+
+  playInsertionAnimations = () => {
+    const cols = Array.from(document.getElementsByClassName('Col'));
+    const animations = this.state.animations;
+
+    for (let i = 0; i < animations.length; i++) {
+      setTimeout(() => {
+        if (animations[i].finalSwap) {
+          cols[animations[i].cols[0]].style.backgroundColor = 'blue';
+          cols[animations[i].cols[0]].style.height = animations[i].val;
+        } else {
+          cols[animations[i].cols[0]].style.backgroundColor = 'red';
+          cols[animations[i].cols[1]].style.backgroundColor = 'red';
+
+          // j + 1 height = j height
+          cols[animations[i].cols[1]].style.height = cols[animations[i].cols[0]].style.height;
+        }
+
+        setTimeout(() => {
+          if (animations[i].finalSwap) {
+            cols[animations[i].cols[0]].style.backgroundColor = 'darkseagreen';
+          } else {
+            cols[animations[i].cols[0]].style.backgroundColor = 'darkseagreen';
+            cols[animations[i].cols[1]].style.backgroundColor = 'darkseagreen';
+          }
+          
+        }, 10);
+      }, i * 10);
+    }
+
+    this.setState({ isSorted: true });
+  }
 
   resetArray = () => {
     let cols = [];
@@ -150,16 +180,10 @@ class SortingVisualizer extends Component {
         <button onClick={this.resetWorstCase}>
           Worst Case
         </button>
-        <button onClick={this.bubbleSort}>
-          BubbleSort
-        </button>
-        <button onClick={this.selectionSort}>
-          Selection sort
-        </button>
         <button onClick={this.insertionSort}>
           Insertion sort
         </button>
-        <button onClick={this.insertionSort}>
+        <button onClick={this.runCurrentAlgo}>
           Run {this.state.currentAlgo}
         </button>
       </Layout>
