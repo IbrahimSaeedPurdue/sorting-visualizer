@@ -13,7 +13,7 @@ class SortingVisualizer extends Component {
     colNum: 100,
     animations: [],
     isSorted: false,
-    currentAlgo: 'Bubble Sort'
+    currentAlgo: 'Insertion Sort'
   };
 
 
@@ -68,10 +68,18 @@ class SortingVisualizer extends Component {
   };
 
   selectionSort = () => {
+    if (this.state.isSorted) {
+      alert('already sorted');
+      return;
+    }
     this.setAnimations(selectionSortAlgo, this.playAnimations);
   }
 
   insertionSort = () => {
+    if (this.state.isSorted) {
+      alert('already sorted');
+      return;
+    }
     this.setAnimations(insertionSortAlgo, this.playInsertionAnimations);
   };
 
@@ -111,18 +119,26 @@ class SortingVisualizer extends Component {
   playInsertionAnimations = () => {
     const cols = Array.from(document.getElementsByClassName('Col'));
     const animations = this.state.animations;
+    let isNewCol = false;
 
     for (let i = 0; i < animations.length; i++) {
+      
       setTimeout(() => {
         if (animations[i].finalSwap) {
-          cols[animations[i].cols[0]].style.backgroundColor = 'blue';
-          cols[animations[i].cols[0]].style.height = animations[i].val;
-        } else {
           cols[animations[i].cols[0]].style.backgroundColor = 'red';
-          cols[animations[i].cols[1]].style.backgroundColor = 'red';
+          isNewCol = true;
+        } else {
+          if (isNewCol) {
+            cols[animations[i].cols[0]].style.backgroundColor = 'brown';
+            isNewCol = false;
+          } else{
+            cols[animations[i].cols[0]].style.backgroundColor = 'blue';
+          }
+          
 
-          // j + 1 height = j height
+          let tempHeight = cols[animations[i].cols[1]].style.height;
           cols[animations[i].cols[1]].style.height = cols[animations[i].cols[0]].style.height;
+          cols[animations[i].cols[0]].style.height = tempHeight;
         }
 
         setTimeout(() => {
@@ -132,7 +148,7 @@ class SortingVisualizer extends Component {
             cols[animations[i].cols[0]].style.backgroundColor = 'darkseagreen';
             cols[animations[i].cols[1]].style.backgroundColor = 'darkseagreen';
           }
-          
+
         }, 10);
       }, i * 10);
     }

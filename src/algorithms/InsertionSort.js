@@ -6,7 +6,6 @@ const insertionSort = (colArray) => {
     while (j >= 0 && colArray[j] > val) {
       animations.push({
         cols: [j, j + 1],
-        val: val,
         finalSwap: false
       });
       colArray[j + 1] = colArray[j];
@@ -14,7 +13,6 @@ const insertionSort = (colArray) => {
     }
     animations.push({
       cols: [j + 1],
-      val: val,
       finalSwap: true
     });
 
