@@ -1,5 +1,6 @@
 .Col {
   width: 2px;
+  height: 500px;
   background-color: darkseagreen;
   display: inline-block;
   margin: 0px 1px;

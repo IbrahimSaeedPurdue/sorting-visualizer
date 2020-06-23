@@ -11,7 +11,7 @@ const colsList = (props) => {
         key={i} />
     );
   }
-  
+
   return (
     <div className={classes.ColsList} >
       {cols}
