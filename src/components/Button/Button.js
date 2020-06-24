@@ -1,12 +1,14 @@
 import React from 'react';
-import classes from './Button.module.css';
+import './Button.scss';
 
 const button = (props) => (
-  <div className={classes.Button}>
-    <div className={classes.Link}>{props.children}</div>
-    <div className={classes.BotBorder} />
+  <div className="container">
+    <div className="button" onClick={props.clicked}>
+      <div className="icon">
+        <p>{props.children}</p>
+      </div>
+    </div>
   </div>
-
 );
 
 export default button;

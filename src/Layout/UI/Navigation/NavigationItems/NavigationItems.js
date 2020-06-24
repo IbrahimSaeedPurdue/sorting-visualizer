@@ -64,8 +64,6 @@ const NavigationItems = (props) => {
         links={['Complex Sorts', 'Complex Sorts', 'Complex Sorts']}>Complex Sorts</Dropdown>
 
       <li><a href="/">About</a></li>
-      <li><a href="/">Contact</a></li>
-      <li><a href="/">Signin</a></li>
     </ul>
   );
 

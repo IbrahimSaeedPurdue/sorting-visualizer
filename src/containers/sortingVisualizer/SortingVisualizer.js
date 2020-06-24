@@ -6,6 +6,7 @@ import getMergeSortAnimations from '../../algorithms/MergeSort';
 import '../../components/ColsList/Col/Col.css';
 import Layout from '../../Layout/Layout';
 import ColsList from '../../components/ColsList/ColsList';
+import Button from '../../components/Button/Button';
 
 class SortingVisualizer extends Component {
   state = {
@@ -13,21 +14,34 @@ class SortingVisualizer extends Component {
     colNum: 0,
     animations: [],
     isSorted: false,
-    currentAlgo: 'Merge Sort'
+    currentAlgo: 'Merge Sort',
+    screenWidth: null
   };
 
 
 
   componentDidMount() {
+    window.addEventListener('resize', () => {
+      this.colNumHandler(0);
+    });
+
     this.resetArray();
+    this.setState({screenWidth: window.innerWidth});
+  }
+  
+  componentWillUnmount() {
+    window.removeEventListener('resize');
   }
 
-  shouldComponentUpdate = (prevProps, prevState) => {
+  shouldComponentUpdate(prevProps, prevState) {
     if (JSON.stringify(prevState.cols) !== JSON.stringify(this.state.cols)) {
       return true;
     } else if (prevState.currentAlgo !== this.state.currentAlgo) {
       return true;
+    } else if (prevState.colNum !== this.state.currentAlgo) {
+      return true;
     }
+
     return false;
   }
 
@@ -62,6 +76,10 @@ class SortingVisualizer extends Component {
   };
 
   runCurrentAlgo = () => {
+    if (this.state.colNum === 0) {
+      return;
+    }
+
     switch (this.state.currentAlgo) {
       case 'Bubble Sort':
         this.bubbleSort();
@@ -125,20 +143,20 @@ class SortingVisualizer extends Component {
     for (let i = 0; i < animations.length; i++) {
       setTimeout(() => {
         if (animations[i].swap) {
-          cols[animations[i].cols[0]].style.backgroundColor = 'blue';
-          cols[animations[i].cols[1]].style.backgroundColor = 'blue';
+          cols[animations[i].cols[0]].style.backgroundColor = '#ffb74d';
+          cols[animations[i].cols[1]].style.backgroundColor = '#ffb74d';
 
           let tempHeight = cols[animations[i].cols[1]].style.height;
           cols[animations[i].cols[1]].style.height = cols[animations[i].cols[0]].style.height;
           cols[animations[i].cols[0]].style.height = tempHeight;
         } else {
-          cols[animations[i].cols[0]].style.backgroundColor = 'red';
-          cols[animations[i].cols[1]].style.backgroundColor = 'red';
+          cols[animations[i].cols[0]].style.backgroundColor = '#ff9e80';
+          cols[animations[i].cols[1]].style.backgroundColor = '#ff9e80';
         }
 
         setTimeout(() => {
-          cols[animations[i].cols[0]].style.backgroundColor = 'darkseagreen';
-          cols[animations[i].cols[1]].style.backgroundColor = 'darkseagreen';
+          cols[animations[i].cols[0]].style.backgroundColor = '#1abc9c';
+          cols[animations[i].cols[1]].style.backgroundColor = '#1abc9c';
         }, 10);
       }, i * 10);
     }
@@ -155,14 +173,14 @@ class SortingVisualizer extends Component {
       // eslint-disable-next-line
       setTimeout(() => {
         if (animations[i].finalSwap) {
-          cols[animations[i].cols[0]].style.backgroundColor = 'red';
+          cols[animations[i].cols[0]].style.backgroundColor = '#ff9e80';
           isNewCol = true;
         } else {
           if (isNewCol) {
             cols[animations[i].cols[0]].style.backgroundColor = 'brown';
             isNewCol = false;
           } else {
-            cols[animations[i].cols[0]].style.backgroundColor = 'blue';
+            cols[animations[i].cols[0]].style.backgroundColor = '#ffb74d';
           }
 
 
@@ -173,10 +191,10 @@ class SortingVisualizer extends Component {
 
         setTimeout(() => {
           if (animations[i].finalSwap) {
-            cols[animations[i].cols[0]].style.backgroundColor = 'darkseagreen';
+            cols[animations[i].cols[0]].style.backgroundColor = '#1abc9c';
           } else {
-            cols[animations[i].cols[0]].style.backgroundColor = 'darkseagreen';
-            cols[animations[i].cols[1]].style.backgroundColor = 'darkseagreen';
+            cols[animations[i].cols[0]].style.backgroundColor = '#1abc9c';
+            cols[animations[i].cols[1]].style.backgroundColor = '#1abc9c';
           }
 
         }, 10);
@@ -195,17 +213,17 @@ class SortingVisualizer extends Component {
         const [barOneIdx, barTwoIdx] = animations[i];
         const barOneStyle = arrayBars[barOneIdx].style;
         const barTwoStyle = arrayBars[barTwoIdx].style;
-        const color = i % 3 === 0 ? 'red' : 'darkseagreen';
+        const color = i % 3 === 0 ? '#ff9e80' : '#1abc9c';
         setTimeout(() => {
           barOneStyle.backgroundColor = color;
           barTwoStyle.backgroundColor = color;
-        }, i * 10);
+        }, i * 3);
       } else {
         setTimeout(() => {
           const [barOneIdx, newHeight] = animations[i];
           const barOneStyle = arrayBars[barOneIdx].style;
           barOneStyle.height = `${newHeight}px`;
-        }, i * 10);
+        }, i * 3);
       }
     }
 
@@ -224,14 +242,14 @@ class SortingVisualizer extends Component {
     //       console.log(animations[i].cols[1]);
 
     //     } else {
-    //       cols[animations[i].cols[0]].style.backgroundColor = 'red';
-    //       cols[animations[i].cols[1]].style.backgroundColor = 'red';
+    //       cols[animations[i].cols[0]].style.backgroundColor = '#ff9e80';
+    //       cols[animations[i].cols[1]].style.backgroundColor = '#ff9e80';
     //     }
 
     //     if (!animations[i].swap) {
     //       setTimeout(() => {
-    //         cols[animations[i].cols[0]].style.backgroundColor = 'darkseagreen';
-    //         cols[animations[i].cols[1]].style.backgroundColor = 'darkseagreen';
+    //         cols[animations[i].cols[0]].style.backgroundColor = '#1abc9c';
+    //         cols[animations[i].cols[1]].style.backgroundColor = '#1abc9c';
     //       }, 10);
     //     }
     //   }, i * 10);
@@ -273,23 +291,33 @@ class SortingVisualizer extends Component {
   render() {
     return (
       <Layout currentAlgoHandler={this.currentAlgoHandler}
-        colNumHandler={this.colNumHandler}>
+        colNumHandler={this.colNumHandler}
+        colNum={this.state.colNum}>
         <ColsList cols={this.state.cols} />
-        <button onClick={this.resetArray}>
+        {/* <button onClick={this.resetArray}>
           Reset Array
         </button>
         <button onClick={this.resetBestCase}>
           Best Case
         </button>
-        <button onClick={this.resetWorstCase}>
-          Worst Case
-        </button>
-        <button onClick={this.insertionSort}>
-          Insertion sort
-        </button>
         <button onClick={this.runCurrentAlgo}>
           Run {this.state.currentAlgo}
-        </button>
+        </button> */}
+        <center>
+          <Button clicked={this.resetBestCase}>
+            Best Case
+        </Button>
+          <Button clicked={this.resetWorstCase}>
+            Worst Case
+        </Button>
+          <Button clicked={this.resetArray}>
+            Random Array
+        </Button>
+          <Button clicked={() => { this.runCurrentAlgo(this.state.currentAlgo) }}>
+            Start
+        </Button>
+        </center>
+
       </Layout>
     );
   }

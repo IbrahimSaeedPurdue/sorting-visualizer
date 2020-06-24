@@ -13,10 +13,8 @@ const toolbar = (props) => (
           <span></span>
           <span></span>
         </button>
-        {/* <a href="/">
-          <h4>Sorting <span>Visualizer</span></h4>
-        </a> */}
-        <BuildControls colNumHandler={props.colNumHandler} />
+        <BuildControls colNumHandler={props.colNumHandler}
+          colNum={props.colNum} />
       </div>
       <div className="NavbarMenu" id="open-navbar1">
         {/* HERE */}
