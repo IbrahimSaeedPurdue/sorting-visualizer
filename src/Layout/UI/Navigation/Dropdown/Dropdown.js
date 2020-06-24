@@ -2,6 +2,8 @@ import React from 'react';
 import '../../Toolbar/Toolbar.scss';
 import Backdrop from '../../Backdrop/Backdrop';
 import Auxi from '../../../../hoc/Auxi';
+import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const dropdown = (props) => {
   let menuClasses = ["Dropdown"];
@@ -30,7 +32,7 @@ const dropdown = (props) => {
     <Auxi>
       <li className="NavbarDropdown">
         <span onClick={props.toggleMenu} className="DropdownToggler">
-          {props.children}
+          {props.children} <FontAwesomeIcon icon={faAngleDown} />
         </span>
         <ul className={menuClasses.join(' ')} id="my-dropdown-id">
           {menuLinks}

@@ -51,7 +51,6 @@ const NavigationItems = (props) => {
 
   return (
     <ul className="NavbarNav">
-      <li className="Active"><a href="/">Home</a></li>
       <Dropdown toggleMenu={toggleElementaryMenu}
         currentAlgoHandler={props.currentAlgoHandler}
         showMenu={DropdownState.elementaryMenu}
@@ -61,9 +60,7 @@ const NavigationItems = (props) => {
         currentAlgoHandler={props.currentAlgoHandler}
         showMenu={DropdownState.complexMenu}
         clicked={algoChoiceHandler}
-        links={['Complex Sorts', 'Complex Sorts', 'Complex Sorts']}>Complex Sorts</Dropdown>
-
-      <li><a href="/">About</a></li>
+        links={['Merge Sort', 'Coming Soon', 'Coming Soon', 'Coming Soon']}>Complex Sorts</Dropdown>
     </ul>
   );
 

@@ -1,7 +1,8 @@
 .ColsList {
   width: 99%;
   min-height: 500px;
-  margin: 20px auto;
+  margin: 10px 0px 0px 0px;
+  margin-bottom: 0px;
   overflow: auto;
   text-align: center;
 }

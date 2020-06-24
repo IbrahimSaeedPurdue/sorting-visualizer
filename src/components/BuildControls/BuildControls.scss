@@ -4,13 +4,18 @@ $shade-1: #d7dcdf !default;
 $shade-0: #fff !default;
 $teal: #1abc9c !default;
 
+.slider {
+  display: flex;
+  justify-items: center;
+}
+
 .range-slider {
-  margin: 0px 0 0 0%;
+  margin: 10px auto;
 }
 
 
 // Range Slider
-$range-width: 100% !default;
+$range-width: 300px !default;
 
 $range-handle-color: $shade-10 !default;
 $range-handle-color-hover: $teal !default;

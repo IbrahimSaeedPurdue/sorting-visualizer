@@ -6,7 +6,7 @@ import getMergeSortAnimations from '../../algorithms/MergeSort';
 import '../../components/ColsList/Col/Col.css';
 import Layout from '../../Layout/Layout';
 import ColsList from '../../components/ColsList/ColsList';
-import Button from '../../components/Button/Button';
+import BuildControls from '../../components/BuildControls/BuildControls';
 
 class SortingVisualizer extends Component {
   state = {
@@ -26,9 +26,9 @@ class SortingVisualizer extends Component {
     });
 
     this.resetArray();
-    this.setState({screenWidth: window.innerWidth});
+    this.setState({ screenWidth: window.innerWidth });
   }
-  
+
   componentWillUnmount() {
     window.removeEventListener('resize');
   }
@@ -77,7 +77,12 @@ class SortingVisualizer extends Component {
 
   runCurrentAlgo = () => {
     if (this.state.colNum === 0) {
+      alert('Increase the Number of Columns O_o');
       return;
+    }
+
+    if (this.state.currentAlgo === 'Coming Soon') {
+      alert('cmon ma man i said it was coming soon ._. relax now');
     }
 
     switch (this.state.currentAlgo) {
@@ -157,8 +162,8 @@ class SortingVisualizer extends Component {
         setTimeout(() => {
           cols[animations[i].cols[0]].style.backgroundColor = '#1abc9c';
           cols[animations[i].cols[1]].style.backgroundColor = '#1abc9c';
-        }, 10);
-      }, i * 10);
+        }, 3);
+      }, i * 3);
     }
 
     this.setState({ isSorted: true });
@@ -197,8 +202,8 @@ class SortingVisualizer extends Component {
             cols[animations[i].cols[1]].style.backgroundColor = '#1abc9c';
           }
 
-        }, 10);
-      }, i * 10);
+        }, 3);
+      }, i * 3);
     }
 
     this.setState({ isSorted: true });
@@ -290,9 +295,7 @@ class SortingVisualizer extends Component {
 
   render() {
     return (
-      <Layout currentAlgoHandler={this.currentAlgoHandler}
-        colNumHandler={this.colNumHandler}
-        colNum={this.state.colNum}>
+      <Layout currentAlgoHandler={this.currentAlgoHandler}>
         <ColsList cols={this.state.cols} />
         {/* <button onClick={this.resetArray}>
           Reset Array
@@ -303,21 +306,12 @@ class SortingVisualizer extends Component {
         <button onClick={this.runCurrentAlgo}>
           Run {this.state.currentAlgo}
         </button> */}
-        <center>
-          <Button clicked={this.resetBestCase}>
-            Best Case
-        </Button>
-          <Button clicked={this.resetWorstCase}>
-            Worst Case
-        </Button>
-          <Button clicked={this.resetArray}>
-            Random Array
-        </Button>
-          <Button clicked={() => { this.runCurrentAlgo(this.state.currentAlgo) }}>
-            Start
-        </Button>
-        </center>
-
+          <BuildControls resetBestCase={this.resetBestCase}
+            resetWorstCase={this.resetWorstCase}
+            resetArray={this.resetArray}
+            runCurrentAlgo={() => { this.runCurrentAlgo(this.state.currentAlgo) }}
+            colNumHandler={this.colNumHandler}
+            colNum={this.state.colNum} />
       </Layout>
     );
   }
