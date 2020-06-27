@@ -218,7 +218,7 @@ class SortingVisualizer extends Component {
         const [barOneIdx, barTwoIdx] = animations[i];
         const barOneStyle = arrayBars[barOneIdx].style;
         const barTwoStyle = arrayBars[barTwoIdx].style;
-        const color = i % 3 === 0 ? '#ff9e80' : '#1abc9c';
+        const color = i % 3 === 0 ? 'red' : '#1abc9c';
         setTimeout(() => {
           barOneStyle.backgroundColor = color;
           barTwoStyle.backgroundColor = color;
