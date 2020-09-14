@@ -1,6 +1,5 @@
 Live Version: [Sorting-visualizer](https://ibrahimsaeedpurdue.github.io/sorting-visualizer/)
 
 
-### `npm start`
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### `npm start` and open localhost on your browser(127.0.0.1:8000)
+### your might need to install [node}(https://nodejs.org/en/)
